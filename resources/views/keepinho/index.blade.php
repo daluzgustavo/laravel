@@ -1,11 +1,22 @@
 <h1>💡Keepinho</h1>
 <p>Seja bem vindo ao Keepinho, o seu assistente pessoal (Melhor do que o Google).</p>
 
+@if ($errors->any())
+    <div style="color: red;">
+        <h3>Erro!</h3>
+        <ul>
+            @foreach($errors->all() as $err)
+            <li>{{ $err }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form action="{{ route('keep.gravar') }}" method="post">
     @csrf
-    <input type="text" name="titulo">
+    <input type="text" name="titulo" value="{{ old('titulo') }}">
     <br>
-    <textarea name="texto" cols="30" rows="10"></textarea>
+    <textarea name="texto" cols="30" rows="10">{{ old('texto') }}</textarea>
     <br>
     <button type="submit">Salvar</button>
 </form>

@@ -1,5 +1,8 @@
 <h1>💡Keepinho</h1>
 <p>Seja bem vindo ao Keepinho, o seu assistente pessoal (Melhor do que o Google).</p>
+<hr>
+<a href="{{ route('keep.lixeira') }}">🗑️ Lixeira</a>
+<hr>
 
 @if ($errors->any())
     <div style="color: red;">
@@ -15,9 +18,9 @@
 <form action="{{ route('keep.gravar') }}" method="post">
     @csrf
     <input type="text" name="titulo" value="{{ old('titulo') }}">
-    <br>
+    <br><br>
     <textarea name="texto" cols="30" rows="10">{{ old('texto') }}</textarea>
-    <br>
+    <br><br>
     <button type="submit">Salvar</button>
 </form>
 
@@ -36,4 +39,5 @@
             <button type="submit">Apagar</button>
         </form>
     </div>
+    <br>
 @endforeach

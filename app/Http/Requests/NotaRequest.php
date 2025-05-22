@@ -23,7 +23,7 @@ class NotaRequest extends FormRequest
     {
         if(!$this->isMethod('GET')){
         return [
-            'titulo' => 'required|min:3',
+            'titulo' => 'required|min:3|max:255',
             'texto' => 'required',
         ];
     }

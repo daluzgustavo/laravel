@@ -33,6 +33,10 @@ Route::prefix('/keep')->group(function () {
     Route::put('/editar', [KeepinhoController::class, 'editar'])->name('kepp.editarGravar');
 
     Route::delete('/apagar/{nota}', [KeepinhoController::class,'apagar'])->name('keep.apagar');
+
+    Route::get('/lixeira', [KeepinhoController::class, 'lixeira'])->name('keep.lixeira');
+
+    Route::get('/restaurar/{nota}', [KeepinhoController::class, 'restaurar'])->name('keep.restaurar');
 });
 
 Route::prefix('biblioteca')->group(function () {

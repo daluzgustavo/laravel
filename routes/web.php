@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutenticaController;
 use App\Http\Controllers\BibliotecaController;
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
@@ -48,3 +49,11 @@ Route::prefix('biblioteca')->group(function () {
 
     Route::put('/editar', [BibliotecaController::class, 'editar'])->name('biblioteca.editarGravar');
 });
+
+Route::get('/autenticar', [AutenticaController::class, 'index'])->name('autentica');
+
+Route::post('/autenticar/gravar', [AutenticaController::class, 'gravar'])->name('autentica.gravar');
+
+Route::get('/autenticar/login', [AutenticaController::class, 'login'])->name('autentica.login');
+
+Route::post('/autenticar/login', [AutenticaController::class, 'login']);

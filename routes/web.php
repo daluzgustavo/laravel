@@ -4,18 +4,21 @@ use App\Http\Controllers\AutenticaController;
 use App\Http\Controllers\BibliotecaController;
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/teste', function () {
-    return view('teste');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/teste/{valor}', function ($valor) {
-    return "você digitou: {$valor}";
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::get('/calc/somar/{x}/{y}', [CalculosController::class, 'somar']);
@@ -57,3 +60,5 @@ Route::post('/autenticar/gravar', [AutenticaController::class, 'gravar'])->name(
 Route::get('/autenticar/login', [AutenticaController::class, 'login'])->name('autentica.login');
 
 Route::post('/autenticar/login', [AutenticaController::class, 'login']);
+
+require __DIR__.'/auth.php';

@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class AutenticaController extends Controller
 {
     public function index() {
-        return view ('autentica.index');
+        $usuarios = User::all();
+        return view ('autentica.index', compact('usuarios'));
     }
 
     public function gravar(AutenticarRequest $req) {
@@ -25,5 +26,10 @@ class AutenticaController extends Controller
             }
         }
         return view('autentica.login');
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('autentica');
     }
 }

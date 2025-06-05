@@ -4,6 +4,7 @@ use App\Http\Controllers\AutenticaController;
 use App\Http\Controllers\BibliotecaController;
 use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
+use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,5 +61,7 @@ Route::post('/autenticar/gravar', [AutenticaController::class, 'gravar'])->name(
 Route::get('/autenticar/login', [AutenticaController::class, 'login'])->name('autentica.login');
 
 Route::post('/autenticar/login', [AutenticaController::class, 'login']);
+
+Route::resource('produtos', ProdutosController::class);
 
 require __DIR__.'/auth.php';

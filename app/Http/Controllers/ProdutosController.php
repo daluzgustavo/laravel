@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -17,8 +18,12 @@ class ProdutosController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        if($request->hasFile('imagem')) {
+            $imagem = $request->file('imagem');
+            $caminhoImagem = $imagem->store('produtos', 'public');
+        }
         return view('produtos.create');
     }
 
@@ -27,7 +32,17 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->validate([
+            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        if($request->hasFile('imagem')) {
+            $imagem = $request->file('imagem');
+            $caminhoImagem = $imagem->store('produtos', 'public');
+            $dados['imagem'] = $caminhoImagem;
+
+        }
+        Produto::create($dados);
+        return redirect()->route('produtos.index');
     }
 
     /**

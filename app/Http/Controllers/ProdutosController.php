@@ -12,7 +12,8 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        return view('produtos.index');
+        $produtos = Produto::all();
+        return view('produtos.index', compact('produtos'));
     }
 
     /**
@@ -20,29 +21,33 @@ class ProdutosController extends Controller
      */
     public function create(Request $request)
     {
-        if($request->hasFile('imagem')) {
-            $imagem = $request->file('imagem');
-            $caminhoImagem = $imagem->store('produtos', 'public');
-        }
+        // if($request->hasFile('imagem')) {
+        //     $imagem = $request->file('imagem');
+        //     $caminhoImagem = $imagem->store('produtos', 'public');
+        // }
         return view('produtos.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $dados = $request->validate([
+            'nome' => 'required|string|max:255',
+            'preco' => 'required|numeric',
+            'descricao' => 'nullable|string',
             'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-        if($request->hasFile('imagem')) {
+    
+        if ($request->hasFile('imagem')) {
             $imagem = $request->file('imagem');
             $caminhoImagem = $imagem->store('produtos', 'public');
             $dados['imagem'] = $caminhoImagem;
-
         }
+    
         Produto::create($dados);
-        return redirect()->route('produtos.index');
+    
+        return redirect()->route('produtos.index')->with('success', 'Produto cadastrado com sucesso!');
     }
 
     /**

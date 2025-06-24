@@ -64,4 +64,14 @@ Route::post('/autenticar/login', [AutenticaController::class, 'login']);
 
 Route::resource('produtos', ProdutosController::class);
 
+// Route::prefix('carrinho')->group(function () {
+//     Route::get('/', [CarrinhoController::class, 'index'])->name('carrinho');
+
+//     Route::get('/adicionar/{produto}', [CarrinhoController::class, 'adicionar'])->name('carrinho.adicionar');
+
+//     Route::get('/remover/{produto}', [CarrinhoController::class, 'remover'])->name('carrinho.remover');
+// });
+
+
+
 require __DIR__.'/auth.php';

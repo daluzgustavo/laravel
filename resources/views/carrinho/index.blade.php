@@ -1,34 +1,38 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Carrinho
-        </h2>
+        <h2>Carrinho de Compras</h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+    @if(session('success'))
+        <div style="color: green">{{ session('success') }}</div>
+    @endif
 
-                    <x-link-button href="{{ route('produtos.index') }}">
-                        Adicionar produtos
-                    </x-link-button>
+    @if(session('error'))
+        <div style="color: red">{{ session('error') }}</div>
+    @endif
 
-                    @foreach ($produtos as $produto)
-                        <div style="border:1px solid black; margin: 10px; padding: 10px;">
-                            <strong>Nome:</strong> {{ $produto->nome }} <br>
-                            <strong>Preço:</strong> R$ {{ number_format($produto->preco, 2, ',', '.') }} <br>
-                            <strong>Descrição:</strong> {{ $produto->descricao }} <br>
-                            @if($produto->imagem)
-                                <strong>Imagem:</strong> <br>
-                                <img src="{{ asset('storage/' . $produto->imagem) }}" alt="{{ $produto->nome }}" width="150">
-                            @endif
-                            <br>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
-    </div>
+    @if(count($carrinho) > 0)
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Descricao</th>
+                    <th>Imagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($carrinho as $id => $item)
+                        <td>{{ $item['nome'] }}</td>
+                        <td>R$ {{ number_format($item['preco'], 2, ',', '.') }}</td>
+                        <td>{{ $item['descricao'] }}</td>
+                        <td><img src="{{ asset('storage/' . $item['imagem']) }}" width="150"></td>
+                        <td><a href="{{ url('/carrinho/remover/' . $id) }}">Remover</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <p>O carrinho está vazio.</p>
+    @endif
 </x-app-layout>

@@ -24,6 +24,9 @@
                                 <img src="{{ asset('storage/' . $produto->imagem) }}" alt="{{ $produto->nome }}" width="150">
                             @endif
                             <br>
+                            <x-link-button href="{{ route('carrinho.add', $produto->id) }}">
+                                Adicionar ao carrinho
+                            </x-link-button>
                         </div>
                     @endforeach
 

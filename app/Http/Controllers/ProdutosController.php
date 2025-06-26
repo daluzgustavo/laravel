@@ -21,10 +21,6 @@ class ProdutosController extends Controller
      */
     public function create(Request $request)
     {
-        // if($request->hasFile('imagem')) {
-        //     $imagem = $request->file('imagem');
-        //     $caminhoImagem = $imagem->store('produtos', 'public');
-        // }
         return view('produtos.create');
     }
 

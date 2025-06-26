@@ -6,6 +6,7 @@ use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CarrinhoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,14 +65,12 @@ Route::post('/autenticar/login', [AutenticaController::class, 'login']);
 
 Route::resource('produtos', ProdutosController::class);
 
-// Route::prefix('carrinho')->group(function () {
-//     Route::get('/', [CarrinhoController::class, 'index'])->name('carrinho');
+Route::prefix('carrinho')->group(function () {
+    Route::get('/', [CarrinhoController::class, 'index'])->name('carrinho');
 
-//     Route::get('/adicionar/{produto}', [CarrinhoController::class, 'adicionar'])->name('carrinho.adicionar');
+    Route::get('/adicionar/{produtos}', [CarrinhoController::class, 'adicionar'])->name('carrinho.add');
 
-//     Route::get('/remover/{produto}', [CarrinhoController::class, 'remover'])->name('carrinho.remover');
-// });
-
-
+    Route::get('/remover/{produtos}', [CarrinhoController::class, 'remover'])->name('carrinho.remover');
+});
 
 require __DIR__.'/auth.php';

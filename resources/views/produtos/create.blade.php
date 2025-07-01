@@ -29,6 +29,19 @@
                             <x-input-error :messages="$errors->get('preco')" class="mt-2" />
                         </div>
 
+                        <div class="mt-4">
+                            <x-input-label for="categoria_id" :value="__('Categoria')" />
+                                <select id="categoria_id" name="categoria_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">Selecione uma categoria</option>
+                                        @foreach ($categorias as $categoria)
+                                            <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                                                {{ $categoria->nome }}
+                                            </option>
+                                        @endforeach
+                                </select>
+                            <x-input-error :messages="$errors->get('categoria_id')" class="mt-2" />
+                    </div>
+
                         <!-- Descrição -->
                         <div>
                             <x-input-label for="descricao" :value="__('Descrição')" />

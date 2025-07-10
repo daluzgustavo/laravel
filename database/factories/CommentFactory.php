@@ -5,11 +5,12 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Post;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
  */
-class PostFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +20,8 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->realText(25), 
             'content' => fake()->realText(1000),
-            'category_id' => Category::inRandomOrder()->value('id'), 
+            'post_id' => Post::inRandomOrder()->value('id'),
             'user_id' => User::inRandomOrder()->value('id'), 
         ];
     }

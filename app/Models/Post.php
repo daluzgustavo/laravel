@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relation\BelongsTo;
-use Illuminate\Database\Eloquent\Relation\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
 
 class Post extends Model
 {

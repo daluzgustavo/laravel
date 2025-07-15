@@ -7,6 +7,7 @@ use App\Http\Controllers\KeepinhoController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -71,6 +72,18 @@ Route::prefix('carrinho')->group(function () {
     Route::get('/adicionar/{produtos}', [CarrinhoController::class, 'adicionar'])->name('carrinho.add');
 
     Route::get('/remover/{produtos}', [CarrinhoController::class, 'remover'])->name('carrinho.remover');
+});
+
+Route::prefix('posts')->group(function() {
+    Route::get('/', [PostsController::class, 'index'])->name('posts.index');
+
+    Route::post('/criar', [PostsController::class, 'store'])->name('posts.criar');
+
+    Route::get('/mostrar/{id}', [PostsController::class, 'show'])->name('posts.mostrar');
+
+    Route::get('/excluir/{id}', [PostsController::class, 'destroy'])->name('posts.excluir');
+
+    Route::get('/alterar/{id}', [PostsController::class, 'edit'])->name('posts.editar');
 });
 
 require __DIR__.'/auth.php';
